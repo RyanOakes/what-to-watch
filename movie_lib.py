@@ -1,5 +1,7 @@
 import csv
 
+
+    #IMPORT USER RATINGS
 # with open('core_data.csv') as f:
 #     reader = csv.reader(f, delimiter='\t')
 #     headers = next(reader)
@@ -9,9 +11,19 @@ import csv
 #         print(row)
 
 
+    #IMPORT MOVIE INFO
+# with open('movie_data.csv', 'r', encoding='latin_1') as f:
+#     reader = csv.reader(f, delimiter='|')
+#     headers = next(reader)
+#     # print(headers)
+#     # print('------')
+#     for row in reader:
+#         print(row)
 
-with open('movie_data.csv', 'r', encoding='latin_1') as f:
-    reader = csv.reader(f, delimiter= '|')
+
+    #IMPORT USER INFO
+with open('user_info.csv') as f:
+    reader = csv.reader(f, delimiter='|')
     headers = next(reader)
     print(headers)
     print('------')
