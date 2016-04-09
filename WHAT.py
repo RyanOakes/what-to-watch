@@ -1,3 +1,4 @@
+
 import csv
 
 
@@ -5,18 +6,15 @@ import csv
                                 #CLASSES
 #------------------------------------------------------------------------------#
 
-class Movie:
-    def __init__(self, movie_id, title):
-        self.id = movie_id
-        self.title = title
+class Movie():
+    def __init__(self, row):
+        self.id = int(row[0])
+        self.title = row[1]
 
 
     def __str__(self):
-        return str(self.id + " : " + self.title)
-
-    def __repr__(self):
-        return str(self)
-
+        return str(self.id + " " + self.title)
+                            #+ " , " + self.open
 
 
 class User():
@@ -26,11 +24,11 @@ class User():
 class Rating():
     def __init__(self, user, item, rating):
         self.user = user
-        self.item = int(item)
-        self.rating = int(rating)
+        self.item = item
+        self.rating = rating
 
     def __str__(self):
-        return str("User: {}, Item: {}, Rating: {}".format(self.user, self.item, self.rating))
+        return str(self.user + ", " + self.item + ", " + self.rating)
 
     def __repr__(self):
         return self.__str__()
@@ -40,30 +38,27 @@ class Rating():
 #------------------------------------------------------------------------------#
 
 
-def import_user_ratings():
+def import_core_data():
+    master_rating_list = []
 
-    ratings_list = []
-
-    with open('user_ratings.csv') as f:
+    with open('core_data.csv') as f:
         reader = csv.reader(f, delimiter='\t')
         headers = next(reader)
         # print(headers)
         # print('------')
         for row in reader:
 
-            ratings_list.append(Rating(row[0], row[1], row[2]))
+            master_rating_list.append(Rating(row[0], row[1], row[2]))
 
-        # Turns list into list within master_rating
         # i = 0
         # naked_list = []
         # while i<len(master_rating_list):
         #     naked_list.append(master_rating_list[i:i+1])
         #     i += 1
-
+        #
         # master_rating_list = naked_list
 
-        return ratings_list
-
+        return master_rating_list
 
 def import_movie_data():
     with open('movie_data.csv', 'r', encoding='latin_1') as f:
@@ -71,7 +66,7 @@ def import_movie_data():
         headers = next(reader)
         # print(headers)
         # print('------')
-        return reader
+        return
 
 
 def import_user_info():
@@ -84,66 +79,6 @@ def import_user_info():
         #     print(row)
         # for row in reader:
         #     movie_list.append(Movie(row))
-
-
-
-def create_dict_of_movie_title_and_id():
-
-    movies = {}
-
-    with open('movie_data.csv', encoding='latin_1') as item_file:
-    	reader = csv.DictReader(item_file, delimiter='|', fieldnames=['movie_id', 'title'])
-    	for row in reader:
-    		movie = Movie(row['movie_id'], row['title'])
-    		movies[int(movie.id)] = movie.title
-
-    #Turn dict into list
-    # movies = [movies[key] for key in movies]
-
-    return(movies)
-
-
-def user_inputs_movie_id():
-
-    user_input = int(input("\nGimme a movie ID (1-1682) please: "))
-
-    return user_input
-
-
-
-def get_ratings_from_users_movie_choice(user_input):
-
-    user_movie = user_input
-    list_of_ratings_for_movie = []
-    movie_average = []
-
-    for thing in ratings_list:
-        if thing.item == user_input:
-            list_of_ratings_for_movie.append(thing)
-
-    # print(list_of_ratings_for_movie)
-
-    for movie in list_of_ratings_for_movie:
-        movie_average.append(movie.rating)
-
-
-    sum_of_scores = sum(movie_average)
-    length_of_scores = len(movie_average)
-    average_of_score = sum_of_scores / length_of_scores
-    average = float(average_of_score)
-    average = format(average, ".2f")
-
-
-    print ("\nThe average score of " + movies[user_movie] +  " is {}. That's based off {} total reviews!\n".format(average, length_of_scores))
-
-    return average
-
-
-
-# def ascertain_average_rating_of_movie():
-#
-#     for
-
 
 
 
@@ -177,73 +112,16 @@ genre_dict = {
 
 
 
-ratings_list = import_user_ratings()
 
-movies = create_dict_of_movie_title_and_id()
-
-user_input = user_inputs_movie_id()
-
-list_of_ratings_for__users_movie = get_ratings_from_users_movie_choice(user_input)
-
-
-# print(list_of_ratings_for__users_movie)
-
-
-# print(list_of_ratings_for__users_movie)
-
-
-
-
-
-
-
-
-
-
-#Creating dictionary of movie.id and movie.title
-# movies_dict = create_dict_of_movie_title_and_id()
-# print(movies_dict[50])
-
-
-
-
+# def create_rating_data(master_rating_list):
 #
+#     user_rating_list = []
 #
-# FIND ALL RATINGS FOR MOVIE BY ID
+#     user_rating_list = master_rating_list.append[0]
 #
-# user item rating
-# 196	  242	 3
+master_rating_list = import_core_data()
 
-
-# random_dict = create_dict_of_movie_title_and_id()
-#
-# print(random_dict)
-
-
-
-# ratings_list = import_user_ratings()
-#
-# print(ratings_list)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# master_movie_list = import_movie_data()
-
-# print(master_rating_list[0])
-# print(master_rating_list[0].rating)
+print(master_rating_list[0].rating)
 
 #
 # user_id_list = []
@@ -259,11 +137,7 @@ list_of_ratings_for__users_movie = get_ratings_from_users_movie_choice(user_inpu
 
 
 
-# def create_rating_data(master_rating_list):
-#
-#     user_rating_list = []
-#
-#     user_rating_list = master_rating_list.append[0]
+
 
 #
 # i = 0
