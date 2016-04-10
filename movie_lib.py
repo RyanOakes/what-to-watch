@@ -194,6 +194,7 @@ def user_selects_from_main_screen_options():
     validity_check = check_validity_of_user_selection(user_input)
 
     if not validity_check:
+        clear()
         print("\nNice try space cadet - please make a valid selection!\n")
         return user_selects_from_main_screen_options()
 
@@ -222,7 +223,7 @@ def initiate_user_selection(user_mode_choice):
         print('\nPardon our construction - this feature coming Summer 2016!\n')
 
     if user_mode_choice == 5:
-        print('\nPardon our construction - this feature coming Summer 2016!\n')
+        pass
 
     if user_mode_choice == 6:
         return user_mode_choice
@@ -235,22 +236,32 @@ def film_average_by_movie_id():
 
 def suggest_films_based_off_job():
 
+    #Create set of acceptable job input
+    jobs = []
+    for user in user_info_list:
+        jobs.append(user.occupation)
 
-    job_input = input('\nGimme yo occupation por favor: ')
+    jobs = set(jobs)
+
+    print("Acceptable entries:", jobs)
+    job_input = input('\nPlease provide your current occupation: ')
+
+
     coworkers_list = []
     for job in user_info_list:
         if job.occupation == job_input:
             coworkers_list.append(job)
 
+
     coworkers_length = len(coworkers_list)
-    print("\nAwesome, there are {} other ".format(coworkers_length) + job_input + "s here as well!")
+    print("\nAwesome, there are {} other ".format(coworkers_length) + job_input + "s here as well!\n")
 
 
     just_id = []
 
     for info in coworkers_list:
         just_id.append(int(info.user_id))
-    print(just_id)
+
 
 
 def game_over():
@@ -262,6 +273,8 @@ def game_over():
 def main():
 
     print("\nWelcome to The Cinematic Emporium!\n")
+
+
 
     while True:
 
