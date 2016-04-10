@@ -1,11 +1,11 @@
 import csv
-
+import os
 
 
                                 #CLASSES
 #------------------------------------------------------------------------------#
 
-class Movie:
+class Movie():
     def __init__(self, movie_id, title):
         self.id = movie_id
         self.title = title
@@ -20,7 +20,16 @@ class Movie:
 
 
 class User():
-    pass
+    def __init__(self, user_id, occupation):
+        self.user_id = user_id
+        self.occupation = occupation
+
+    def __str__(self):
+        return str(self.user_id + " : " + self.occupation)
+
+    def __repr__(self):
+        return str(self)
+
 
 
 class Rating():
@@ -38,6 +47,12 @@ class Rating():
 
                               #FUNCTIONS
 #------------------------------------------------------------------------------#
+
+def clear():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
 
 
 def import_user_ratings():
@@ -75,6 +90,9 @@ def import_movie_data():
 
 
 def import_user_info():
+
+    user_info_list = []
+
     with open('user_info.csv') as f:
         reader = csv.reader(f, delimiter='|')
         headers = next(reader)
@@ -84,6 +102,28 @@ def import_user_info():
         #     print(row)
         # for row in reader:
         #     movie_list.append(Movie(row))
+
+        for row in reader:
+            user_info_list.append(User(row[0], row[3]))
+
+        return user_info_list
+
+
+
+def create_dict_of_user_id_and_occupation():
+
+    user_info_list = {}
+
+    with open('user_info.csv', encoding = 'latin1') as f:
+        reader = csv.DictReader(f, delimiter='|', fieldnames=['user_id', 'Age', 'Sex', 'occupation', "ZipCode"])
+        headers = next(reader)
+
+        for row in reader:
+            user = User(row['user_id'], row['occupation'])
+            user_info_list[int(user.user_id)] = user.occupation
+
+
+        return user_info_list
 
 
 
@@ -134,15 +174,62 @@ def get_ratings_from_users_movie_choice(user_input):
     average = format(average, ".2f")
 
 
-    print ("\nThe average score of " + movies[user_movie] +  " is {}. That's based off {} total reviews!\n".format(average, length_of_scores))
+    print("\nBased off {} reviews, the average score of ".format(length_of_scores) + movies[user_movie] + " is {}!\n".format(average))
 
     return average
 
 
 
-# def ascertain_average_rating_of_movie():
-#
-#     for
+
+def user_selects_from_main_screen_options():
+
+    print("""Please choose from the follow options: \n
+(1) Find a film's average rating by movie ID.
+(2) Find a film's average rating by movie title.
+(3) Browse the Top 25 films!
+(4) Browse the Top 25 films you haven't seen!
+(5) Browse the Top 10 films according to your occupational peers!
+(6) Exit this cinematic wasteland!
+""")
+
+    user_input = input("What would you like to do? ")
+    validity_check = check_validity_of_user_selection(user_input)
+
+    if not validity_check:
+        print("\nNice try space cadet - please make a valid selection!\n")
+        return user_selects_from_main_screen_options()
+
+    return int(user_input)
+
+
+
+def check_validity_of_user_selection(user_input):
+
+    return user_input.isnumeric() and int(user_input) in range (1,7)
+
+
+
+def initiate_user_selection(user_mode_choice):
+
+    if user_mode_choice == 1:
+        return film_average_by_movie_id()
+
+    if user_mode_choice == 6:
+        return user_mode_choice
+
+
+def film_average_by_movie_id():
+    movie_id = user_inputs_movie_id()
+    average = get_ratings_from_users_movie_choice(movie_id)
+
+
+
+
+def game_over():
+
+    print("\nThanks for visiting! Don't forget to check out our kiosk at your local Blockbuster!\n")
+    return True
+
 
 
 
@@ -176,14 +263,55 @@ genre_dict = {
 }
 
 
-
 ratings_list = import_user_ratings()
-
 movies = create_dict_of_movie_title_and_id()
+user_info_list = import_user_info()
 
-user_input = user_inputs_movie_id()
+clear()
 
-list_of_ratings_for__users_movie = get_ratings_from_users_movie_choice(user_input)
+print("\nWelcome to The Cinematic Emporium!\n")
+
+while True:
+
+
+    user_mode_choice = user_selects_from_main_screen_options()
+
+
+    clear()
+    initiate_user_selection(user_mode_choice)
+
+
+
+    if user_mode_choice == 6:
+        break
+
+
+    # list_of_ratings_for__users_movie = get_ratings_from_users_movie_choice(user_input)
+
+
+    # user_info_list = import_user_info()
+    #
+    # print(user_info_list[4])
+    #
+    # user_job_list = create_dict_of_user_id_and_occupation()
+    #
+    # print(user_job_list)
+
+
+game_over()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # print(list_of_ratings_for__users_movie)
