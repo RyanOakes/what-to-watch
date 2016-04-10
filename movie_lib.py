@@ -10,7 +10,6 @@ class Movie():
         self.id = movie_id
         self.title = title
 
-
     def __str__(self):
         return str(self.id + " : " + self.title)
 
@@ -43,7 +42,6 @@ class Rating():
 
     def __repr__(self):
         return self.__str__()
-
 
                               #FUNCTIONS
 #------------------------------------------------------------------------------#
@@ -188,7 +186,7 @@ def user_selects_from_main_screen_options():
 (2) Find a film's average rating by movie title.
 (3) Browse the Top 25 films!
 (4) Browse the Top 25 films you haven't seen!
-(5) Browse the Top 10 films according to your occupational peers!
+(5) Browse the Top 10 films amongst your occupational peers!
 (6) Exit this cinematic wasteland!
 """)
 
@@ -227,8 +225,8 @@ def film_average_by_movie_id():
 
 def game_over():
 
-    print("\nThanks for visiting! Don't forget to check out our kiosk at your local Blockbuster!\n")
-    return True
+    print("\nThanks for visiting! Don't forget to check out one of our kiosk at your local Blockbuster!\n")
+
 
 
 
@@ -266,45 +264,59 @@ genre_dict = {
 ratings_list = import_user_ratings()
 movies = create_dict_of_movie_title_and_id()
 user_info_list = import_user_info()
+user_dict_list = create_dict_of_user_id_and_occupation()
 
 clear()
 
-print("\nWelcome to The Cinematic Emporium!\n")
-
-while True:
-
-
-    user_mode_choice = user_selects_from_main_screen_options()
+# print(ratings_list)
+print(user_info_list)
 
 
-    clear()
-    initiate_user_selection(user_mode_choice)
+job_input = input('\nGimme yo occupation so I can check your job: ')
+coworkers_list = []
+for job in user_info_list:
+    if job.occupation == job_input:
+        coworkers_list.append(job)
 
 
+coworkers_length = len(coworkers_list)
+print("\nAwesome, there are {} other ".format(coworkers_length) + job_input + "s here as well!")
 
-    if user_mode_choice == 6:
-        break
+print(coworkers_list
 
-
-    # list_of_ratings_for__users_movie = get_ratings_from_users_movie_choice(user_input)
-
-
-    # user_info_list = import_user_info()
-    #
-    # print(user_info_list[4])
-    #
-    # user_job_list = create_dict_of_user_id_and_occupation()
-    #
-    # print(user_job_list)
+print(ratings_list)
 
 
-game_over()
+# print("\nWelcome to The Cinematic Emporium!\n")
+#
+# while True:
+#
+#
+#     user_mode_choice = user_selects_from_main_screen_options()
+#
+#
+#     clear()
+#     initiate_user_selection(user_mode_choice)
+#
+#
+#
+#     if user_mode_choice == 6:
+#         break
+#
+#
+#     # list_of_ratings_for__users_movie = get_ratings_from_users_movie_choice(user_input)
+#
+#
+#     # user_info_list = import_user_info()
+#     #
+#     # print(user_info_list[4])
+#     #
 
 
-
-
-
-
+# user_job_list = create_dict_of_user_id_and_occupation()
+# print(user_job_list)
+#
+# game_over()
 
 
 
