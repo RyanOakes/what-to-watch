@@ -212,6 +212,18 @@ def initiate_user_selection(user_mode_choice):
     if user_mode_choice == 1:
         return film_average_by_movie_id()
 
+    if user_mode_choice == 2:
+        print('\nPardon our construction - this feature coming Summer 2016!\n')
+
+    if user_mode_choice == 3:
+        print('\nPardon our construction - this feature coming Summer 2016!\n')
+
+    if user_mode_choice == 4:
+        print('\nPardon our construction - this feature coming Summer 2016!\n')
+
+    if user_mode_choice == 5:
+        print('\nPardon our construction - this feature coming Summer 2016!\n')
+
     if user_mode_choice == 6:
         return user_mode_choice
 
@@ -221,6 +233,24 @@ def film_average_by_movie_id():
     average = get_ratings_from_users_movie_choice(movie_id)
 
 
+def suggest_films_based_off_job():
+
+
+    job_input = input('\nGimme yo occupation por favor: ')
+    coworkers_list = []
+    for job in user_info_list:
+        if job.occupation == job_input:
+            coworkers_list.append(job)
+
+    coworkers_length = len(coworkers_list)
+    print("\nAwesome, there are {} other ".format(coworkers_length) + job_input + "s here as well!")
+
+
+    just_id = []
+
+    for info in coworkers_list:
+        just_id.append(int(info.user_id))
+    print(just_id)
 
 
 def game_over():
@@ -229,242 +259,43 @@ def game_over():
 
 
 
+def main():
+
+    print("\nWelcome to The Cinematic Emporium!\n")
+
+    while True:
+
+
+        user_mode_choice = user_selects_from_main_screen_options()
+
+
+        clear()
+        initiate_user_selection(user_mode_choice)
+
+
+        if user_mode_choice == 5:
+            suggest_films_based_off_job()
+
+        if user_mode_choice == 6:
+            break
+
+
+    game_over()
 
 
 
-
-                              #MAIN
+                                #MAIN
 #------------------------------------------------------------------------------#
-
-
-genre_dict = {
-
-    0: 'unknown',
-    1: 'Action',
-    2: 'Adventure',
-    3: 'Animation',
-    4: "Children's",
-    5: 'Comedy',
-    6: 'Crime',
-    7: 'Documentary',
-    8: 'Drama',
-    9: 'Fantasy',
-    10: 'Film-Noir',
-    11: 'Horror',
-    12: 'Musical',
-    13: 'Mystery',
-    14: 'Romance',
-    15: 'Sci-Fi',
-    16: 'Thriller',
-    17: 'War',
-    18: 'Western'
-}
-
 
 ratings_list = import_user_ratings()
 movies = create_dict_of_movie_title_and_id()
 user_info_list = import_user_info()
 user_dict_list = create_dict_of_user_id_and_occupation()
+user_job_list = create_dict_of_user_id_and_occupation()
+
 
 clear()
 
-# print(ratings_list)
-print(user_info_list)
 
-
-job_input = input('\nGimme yo occupation so I can check your job: ')
-coworkers_list = []
-for job in user_info_list:
-    if job.occupation == job_input:
-        coworkers_list.append(job)
-
-
-coworkers_length = len(coworkers_list)
-print("\nAwesome, there are {} other ".format(coworkers_length) + job_input + "s here as well!")
-
-print(coworkers_list
-
-print(ratings_list)
-
-
-# print("\nWelcome to The Cinematic Emporium!\n")
-#
-# while True:
-#
-#
-#     user_mode_choice = user_selects_from_main_screen_options()
-#
-#
-#     clear()
-#     initiate_user_selection(user_mode_choice)
-#
-#
-#
-#     if user_mode_choice == 6:
-#         break
-#
-#
-#     # list_of_ratings_for__users_movie = get_ratings_from_users_movie_choice(user_input)
-#
-#
-#     # user_info_list = import_user_info()
-#     #
-#     # print(user_info_list[4])
-#     #
-
-
-# user_job_list = create_dict_of_user_id_and_occupation()
-# print(user_job_list)
-#
-# game_over()
-
-
-
-
-
-
-
-
-
-# print(list_of_ratings_for__users_movie)
-
-
-# print(list_of_ratings_for__users_movie)
-
-
-
-
-
-
-
-
-
-
-#Creating dictionary of movie.id and movie.title
-# movies_dict = create_dict_of_movie_title_and_id()
-# print(movies_dict[50])
-
-
-
-
-#
-#
-# FIND ALL RATINGS FOR MOVIE BY ID
-#
-# user item rating
-# 196	  242	 3
-
-
-# random_dict = create_dict_of_movie_title_and_id()
-#
-# print(random_dict)
-
-
-
-# ratings_list = import_user_ratings()
-#
-# print(ratings_list)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# master_movie_list = import_movie_data()
-
-# print(master_rating_list[0])
-# print(master_rating_list[0].rating)
-
-#
-# user_id_list = []
-#
-# for mini_list in master_rating_list:
-#
-#     for user_list in mini_list:
-#
-#         user_id_list.append(user_list[0])
-#
-# print(user_id_list)
-
-
-
-
-# def create_rating_data(master_rating_list):
-#
-#     user_rating_list = []
-#
-#     user_rating_list = master_rating_list.append[0]
-
-#
-# i = 0
-# naked_list = []
-# while i<len(master_rating_list):
-#     naked_list.append(master_rating_list[i:i+1])
-#     i += 1
-
-
-#
-#     for row in reader:
-#         movie_list.append(Movie(row))
-#
-#
-# for movie in movie_list:
-#     movie_dict[movie.id] = movie.title
-#
-#
-# print(movie_dict)
-
-
-#dict practice
-
-    # for row in reader:
-    #     print(row['movie_id'], row['title']
-
-
-
-    # for movie in movie_list:
-    #     print(movie.id)
-
-    # movie_list = dict(movie_list)
-    #
-    # movie_dict = {key: value for (key, value) in movie_list}
-    # for item in movie_list:
-    #     movie_dict = for key in movie_list
-#
-# movie_dict = { movie_list for (k,v) in zip(keys, values)}
-
-
-# movie_dict = {}
-# ​
-# with open('movie_data.csv') as f:
-# 	reader = csv.DictReader(f, delimiter='|')
-# 	for row in reader:
-# 		row = {key: row[key] for key in row if key in headers}
-# ​
-# 		test = EODData(row)
-#
-# 		a_list.append(test)
-
-
-
-# Find all ratings for a movie by id
-# Find the average rating for a movie by id
-# Find the name of a movie by id
-# Find all ratings for a user
-
-
-# The number of users, items, and ratings in the u data set.
-#
-# 943 users
-# 1682 items
-# 100000 ratings
+if __name__ == '__main__':
+    main()
